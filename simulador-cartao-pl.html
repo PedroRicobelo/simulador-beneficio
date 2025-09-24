@@ -66,6 +66,7 @@
         left: 0;
         right: 0;
         bottom: 0;
+
         background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="white" opacity="0.05"/><circle cx="75" cy="75" r="0.5" fill="white" opacity="0.05"/><circle cx="50" cy="10" r="0.3" fill="white" opacity="0.05"/><circle cx="10" cy="60" r="0.3" fill="white" opacity="0.05"/><circle cx="90" cy="40" r="0.3" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
         opacity: 0.15;
       }
@@ -110,6 +111,11 @@
 
       .form-section {
         padding: 50px 40px;
+        background: linear-gradient(180deg, #e9e9e9 0%, #f8f8f8 100%);
+        border-radius: 0;
+        margin: 0;
+        border: none;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
       }
 
       .form-row {
@@ -167,34 +173,35 @@
       }
 
       .slider.disabled::-webkit-slider-thumb {
-        background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+        background: #c53030 !important;
         cursor: not-allowed;
-        box-shadow: 0 2px 6px rgba(107, 114, 128, 0.3);
+        box-shadow: 0 6px 20px rgba(197, 48, 48, 0.4),
+          0 0 0 4px rgba(197, 48, 48, 0.1);
       }
 
       .slider.disabled::-webkit-slider-thumb:hover {
         transform: none;
-        box-shadow: 0 2px 6px rgba(107, 114, 128, 0.3);
+        box-shadow: 0 6px 20px rgba(197, 48, 48, 0.4),
+          0 0 0 4px rgba(197, 48, 48, 0.1);
       }
 
       .slider.disabled::-moz-range-thumb {
-        background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+        background: #c53030 !important;
         cursor: not-allowed;
-        box-shadow: 0 2px 6px rgba(107, 114, 128, 0.3);
+        box-shadow: 0 6px 20px rgba(197, 48, 48, 0.4),
+          0 0 0 4px rgba(197, 48, 48, 0.1);
       }
 
       .slider.disabled::-moz-range-track {
         background: linear-gradient(90deg, #e5e7eb 0%, #d1d5db 100%);
       }
 
-      /* Efeito vermelho progressivo para todos os sliders */
       .slider::-webkit-slider-track {
         background: linear-gradient(90deg, #e2e8f0 0%, #cbd5e1 100%);
         height: 14px;
         border-radius: 8px;
       }
 
-      /* Efeito de progresso vermelho que acompanha a bolinha */
       .slider-container {
         position: relative;
         margin-bottom: 10px;
@@ -204,11 +211,22 @@
         height: 14px;
       }
 
+      .slider-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: transparent;
+        border-radius: 8px;
+        transition: width 0.1s ease;
+        z-index: 1;
+      }
+
       .slider {
         position: relative;
         z-index: 2;
         width: 100%;
-        background: transparent; /* Make slider background transparent */
+        background: transparent;
       }
 
       .slider::-webkit-slider-thumb {
@@ -248,7 +266,6 @@
         background: linear-gradient(90deg, #e2e8f0 0%, #cbd5e1 100%);
       }
 
-      /* FORÇAR Clube de Vantagens a ter EXATAMENTE a mesma aparência dos outros sliders */
       #clubeVantagens::-webkit-slider-thumb {
         -webkit-appearance: none !important;
         appearance: none !important;
@@ -285,6 +302,47 @@
       }
 
       #clubeVantagens::-moz-range-track {
+        height: 14px !important;
+        border-radius: 8px !important;
+        background: transparent !important;
+      }
+
+      #premiacao::-webkit-slider-thumb {
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        width: 32px !important;
+        height: 32px !important;
+        border-radius: 50% !important;
+        background: #c53030 !important;
+        cursor: pointer !important;
+        box-shadow: 0 6px 20px rgba(197, 48, 48, 0.4),
+          0 0 0 4px rgba(197, 48, 48, 0.1) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        border: 3px solid white !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      #premiacao::-moz-range-thumb {
+        width: 32px !important;
+        height: 32px !important;
+        border-radius: 50% !important;
+        background: #c53030 !important;
+        cursor: pointer !important;
+        border: 3px solid white !important;
+        box-shadow: 0 6px 20px rgba(197, 48, 48, 0.4),
+          0 0 0 4px rgba(197, 48, 48, 0.1) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      #premiacao::-webkit-slider-track {
+        background: transparent !important;
+        height: 14px !important;
+        border-radius: 8px !important;
+      }
+
+      #premiacao::-moz-range-track {
         height: 14px !important;
         border-radius: 8px !important;
         background: transparent !important;
@@ -638,6 +696,7 @@
             class="banner-image"
           />
         </div>
+
         <p>Exclusivo para cartões Private Label</p>
       </div>
 
@@ -649,8 +708,10 @@
               type="number"
               id="funcionarios"
               min="1"
+              max="9999999999"
               placeholder="Ex: 100"
-              oninput="zerarSliders()"
+              oninput="limitarFuncionarios(this); zerarSliders()"
+              maxlength="10"
             />
           </div>
 
@@ -674,20 +735,9 @@
         </div>
 
         <div class="slider-section">
-          <div
-            style="
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              margin-bottom: 20px;
-            "
-          >
-            <h3 style="margin: 0">Distribua seu benefício</h3>
-            <div class="stat-card" style="margin: 0; padding: 16px 20px">
-              <div class="stat-value" id="beneficioDisponivel">R$ 0,00</div>
-              <div class="stat-label">Disponível</div>
-            </div>
-          </div>
+          <h3 style="margin-bottom: 32px; text-align: center">
+            Distribua seu benefício
+          </h3>
 
           <div class="slider-item">
             <div class="checkbox-container">
@@ -703,11 +753,8 @@
             <div class="slider-header">
               <div class="slider-title">
                 <span class="slider-label">Wellhub</span>
-                <span class="slider-cost" id="wellhubCustoInline"
-                  >Custo: R$ 0,00</span
-                >
               </div>
-              <span class="slider-value" id="wellhubValue">R$ 0,00</span>
+              <span class="slider-value" id="wellhubValue">0%</span>
             </div>
             <div class="slider-container">
               <input
@@ -738,11 +785,8 @@
             <div class="slider-header">
               <div class="slider-title">
                 <span class="slider-label">Plano Odontológico</span>
-                <span class="slider-cost" id="odontologicoCustoInline"
-                  >Custo: R$ 0,00</span
-                >
               </div>
-              <span class="slider-value" id="odontologicoValue">R$ 0,00</span>
+              <span class="slider-value" id="odontologicoValue">0%</span>
             </div>
             <div class="slider-container">
               <input
@@ -774,11 +818,8 @@
             <div class="slider-header">
               <div class="slider-title">
                 <span class="slider-label">Clube de Vantagens</span>
-                <span class="slider-cost" id="clubeVantagensCustoInline"
-                  >Custo: R$ 0,00</span
-                >
               </div>
-              <span class="slider-value" id="clubeVantagensValue">R$ 0,00</span>
+              <span class="slider-value" id="clubeVantagensValue">0%</span>
             </div>
             <div class="slider-container">
               <input
@@ -797,7 +838,7 @@
 
           <div class="slider-item">
             <div class="slider-header">
-              <span class="slider-label">Premiação para Funcionários</span>
+              <span class="slider-label">Caixinha de Premiações</span>
               <span class="slider-value" id="premiacaoValue">R$ 0,00</span>
             </div>
             <div class="slider-container">
@@ -810,6 +851,7 @@
                 step="1"
                 value="0"
                 oninput="atualizarSlider('premiacao')"
+                disabled
               />
             </div>
           </div>
@@ -825,20 +867,28 @@
         }).format(valor);
       }
 
-      function formatarValorMedio(input) {
-        // Remove tudo que não é número
+      function limitarFuncionarios(input) {
         let valor = input.value.replace(/[^\d]/g, "");
 
-        // Se não tem valor, limpa o campo
+        if (valor.length > 10) {
+          valor = valor.substring(0, 10);
+        }
+        input.value = valor;
+      }
+
+      function formatarValorMedio(input) {
+        let valor = input.value.replace(/[^\d]/g, "");
+
+        if (valor.length > 10) {
+          valor = valor.substring(0, 10);
+        }
+
         if (!valor) {
           input.value = "";
           return;
         }
 
-        // Converte para número e divide por 100 para ter centavos
         let numero = parseFloat(valor) / 100;
-
-        // Formata como moeda brasileira
         input.value = formatarMoeda(numero);
       }
 
@@ -846,7 +896,6 @@
         const campo = document.getElementById(campoId);
         if (!campo || !campo.value) return 0;
 
-        // Remove formatação e converte para número
         const valorLimpo = campo.value.replace(/[^\d,]/g, "").replace(",", ".");
         return parseFloat(valorLimpo) || 0;
       }
@@ -897,19 +946,17 @@
       function validarCamposObrigatorios() {
         const { funcionarios, valorMedio } = obterValoresCampos();
         const helpEl = document.getElementById("helpPreencherCampos");
-        const sliders = ["odontologico", "premiacao"];
+        const sliders = ["odontologico"];
 
         const camposValidos =
           funcionarios && valorMedio && funcionarios > 0 && valorMedio > 0;
 
-        // Controlar sliders odontológico e premiação
         sliders.forEach((id) => {
           const slider = document.getElementById(id);
           slider.disabled = !camposValidos;
           slider.classList.toggle("disabled", !camposValidos);
         });
 
-        // Controlar slider do Wellhub (só ativa se campos válidos E checkbox marcado)
         const wellhubSlider = document.getElementById("wellhub");
         const wellhubCheckbox = document.getElementById("wellhubCheckbox");
         if (wellhubSlider && wellhubCheckbox) {
@@ -920,7 +967,6 @@
           );
         }
 
-        // Controlar slider do Odontológico (só ativa se campos válidos E checkbox marcado)
         const odontologicoSlider = document.getElementById("odontologico");
         const odontologicoCheckbox = document.getElementById(
           "odontologicoCheckbox"
@@ -934,17 +980,20 @@
           );
         }
 
-        // Controlar slider do Clube de Vantagens (sempre desabilitado, apenas visual)
         const clubeVantagensSlider = document.getElementById("clubeVantagens");
         const clubeVantagensCheckbox = document.getElementById(
           "clubeVantagensCheckbox"
         );
         if (clubeVantagensSlider && clubeVantagensCheckbox) {
-          // Slider sempre desabilitado, apenas muda a cor
           clubeVantagensSlider.disabled = true;
           clubeVantagensSlider.classList.add("disabled");
+        }
 
-          // Clube de Vantagens usa apenas os estilos padrão dos sliders
+        // O slider de premiação sempre fica desabilitado (apenas visual)
+        const premiacaoSlider = document.getElementById("premiacao");
+        if (premiacaoSlider) {
+          premiacaoSlider.disabled = true;
+          premiacaoSlider.classList.add("disabled");
         }
 
         if (helpEl) {
@@ -959,13 +1008,12 @@
         const slider = document.getElementById("wellhub");
 
         if (checkbox.checked) {
-          // Só ativa se os campos obrigatórios estiverem preenchidos
           validarCamposObrigatorios();
         } else {
           slider.value = 0;
           slider.disabled = true;
           slider.classList.add("disabled");
-          document.getElementById("wellhubValue").textContent = "R$ 0,00";
+          document.getElementById("wellhubValue").textContent = "0%";
           atualizarCalculos();
         }
       }
@@ -975,13 +1023,12 @@
         const slider = document.getElementById("odontologico");
 
         if (checkbox.checked) {
-          // Só ativa se os campos obrigatórios estiverem preenchidos
           validarCamposObrigatorios();
         } else {
           slider.value = 0;
           slider.disabled = true;
           slider.classList.add("disabled");
-          document.getElementById("odontologicoValue").textContent = "R$ 0,00";
+          document.getElementById("odontologicoValue").textContent = "0%";
           atualizarCalculos();
         }
       }
@@ -989,29 +1036,22 @@
       function toggleClubeVantagensSlider() {
         const checkbox = document.getElementById("clubeVantagensCheckbox");
         const slider = document.getElementById("clubeVantagens");
+        const valueElement = document.getElementById("clubeVantagensValue");
 
         if (checkbox.checked) {
-          // Só ativa se os campos obrigatórios estiverem preenchidos
           if (validarCamposObrigatorios()) {
-            // Sempre vai para o valor máximo da barra (10000) visualmente
             slider.value = 10000;
             slider.disabled = true;
             slider.classList.add("disabled");
-            document.getElementById("clubeVantagensValue").textContent =
-              "R$ 0,00";
-
-            // Estilo vermelho aplicado via CSS
-            // Não chama atualizarTotalPorcentagem nem atualizarCalculos
+            // Exibe "100% insento" para o Clube de Vantagens
+            valueElement.textContent = "100% insento";
           }
         } else {
           slider.value = 0;
           slider.disabled = true;
           slider.classList.add("disabled");
-          // Remover apenas a classe disabled
-          document.getElementById("clubeVantagensValue").textContent =
-            "R$ 0,00";
+          valueElement.textContent = "0%";
 
-          // Estilo volta ao normal via CSS
           atualizarCalculos();
         }
       }
@@ -1022,12 +1062,11 @@
         document.getElementById("clubeVantagens").value = 0;
         document.getElementById("premiacao").value = 0;
 
-        document.getElementById("wellhubValue").textContent = "R$ 0,00";
-        document.getElementById("odontologicoValue").textContent = "R$ 0,00";
-        document.getElementById("clubeVantagensValue").textContent = "R$ 0,00";
+        document.getElementById("wellhubValue").textContent = "0%";
+        document.getElementById("odontologicoValue").textContent = "0%";
+        document.getElementById("clubeVantagensValue").textContent = "0%";
         document.getElementById("premiacaoValue").textContent = "R$ 0,00";
 
-        // Desmarcar checkboxes
         document.getElementById("wellhubCheckbox").checked = false;
         document.getElementById("wellhub").disabled = true;
         document.getElementById("wellhub").classList.add("disabled");
@@ -1039,7 +1078,6 @@
         document.getElementById("clubeVantagensCheckbox").checked = false;
         document.getElementById("clubeVantagens").disabled = true;
         document.getElementById("clubeVantagens").classList.add("disabled");
-        // Clube de Vantagens usa apenas os estilos padrão dos sliders
 
         desbloquearTodosSliders();
 
@@ -1055,8 +1093,6 @@
         if (funcionarios && valorMedio) {
           const totalCarregado = funcionarios * valorMedio;
           const beneficio = totalCarregado * 0.03;
-          document.getElementById("beneficioDisponivel").textContent =
-            formatarMoeda(beneficio);
 
           const { custoWellhub, custoOdontologico } =
             atualizarCustosInline(funcionarios);
@@ -1076,13 +1112,8 @@
           if (premiacaoSlider)
             premiacaoSlider.setAttribute("max", Math.floor(beneficio));
 
-          // Clube de Vantagens não precisa definir max pois nunca é editável
-
           atualizarCalculos();
         } else {
-          document.getElementById("beneficioDisponivel").textContent =
-            "R$ 0,00";
-
           const custoInlineEl = document.getElementById("wellhubCustoInline");
           if (custoInlineEl) custoInlineEl.textContent = "Custo: R$ 0,00";
 
@@ -1096,6 +1127,11 @@
       function atualizarSlider(sliderId) {
         if (!validarCamposObrigatorios()) return;
 
+        // Se for o slider de premiação, não faz nada (ele é apenas visual)
+        if (sliderId === "premiacao") {
+          return;
+        }
+
         const slider = document.getElementById(sliderId);
         const valueElement = document.getElementById(sliderId + "Value");
         const { funcionarios, valorMedio } = obterValoresCampos();
@@ -1108,6 +1144,7 @@
           const totalCarregado = funcionarios * valorMedio;
           const beneficio = totalCarregado * 0.03;
 
+          // Limita o valor ao custo máximo (desconto nunca pode ser maior que o custo)
           if (sliderId === "wellhub" && valorReal > custoWellhub) {
             valorReal = custoWellhub;
             slider.value = valorReal;
@@ -1119,45 +1156,96 @@
             slider.value = valorReal;
           }
 
-          // Para o Clube de Vantagens, não considerar nos cálculos de limite
-          const outrosSliders = ["wellhub", "odontologico", "premiacao"].filter(
-            (id) => id !== sliderId
-          );
-
-          // Se o Clube de Vantagens estiver ativado, não incluir no total
+          // Verifica se há excesso e redistribui se necessário
           const clubeVantagensAtivado = document.getElementById(
             "clubeVantagensCheckbox"
           ).checked;
-          let totalOutros = outrosSliders.reduce(
-            (sum, id) => sum + parseInt(document.getElementById(id).value),
-            0
+          const valorClubeVantagens = clubeVantagensAtivado
+            ? 0
+            : parseInt(document.getElementById("clubeVantagens").value);
+
+          // Calcula o total atual
+          const wellhubAtual = parseInt(
+            document.getElementById("wellhub").value
           );
+          const odontologicoAtual = parseInt(
+            document.getElementById("odontologico").value
+          );
+          const totalAtual =
+            wellhubAtual + odontologicoAtual + valorClubeVantagens;
 
-          if (
-            valorReal + totalOutros > beneficio &&
-            sliderId !== "clubeVantagens"
-          ) {
-            valorReal = Math.max(0, beneficio - totalOutros);
-            slider.value = valorReal;
-          }
+          // Se excedeu o benefício, redistribui
+          if (totalAtual > beneficio) {
+            const excesso = totalAtual - beneficio;
+            const totalWellhubOdonto = wellhubAtual + odontologicoAtual;
 
-          if (sliderId === "wellhub") {
-            slider.setAttribute("max", Math.floor(custoWellhub));
-          } else if (sliderId === "odontologico") {
-            slider.setAttribute("max", Math.floor(custoOdontologico));
-          } else if (sliderId === "premiacao") {
-            slider.setAttribute("max", Math.floor(beneficio));
+            if (totalWellhubOdonto > 0) {
+              // Calcula a proporção de cada um
+              const proporcaoWellhub = wellhubAtual / totalWellhubOdonto;
+              const proporcaoOdontologico =
+                odontologicoAtual / totalWellhubOdonto;
+
+              // Reduz proporcionalmente
+              const reducaoWellhub = excesso * proporcaoWellhub;
+              const reducaoOdontologico = excesso * proporcaoOdontologico;
+
+              // Calcula novos valores
+              const novoValorWellhub = Math.max(
+                0,
+                Math.round(wellhubAtual - reducaoWellhub)
+              );
+              const novoValorOdontologico = Math.max(
+                0,
+                Math.round(odontologicoAtual - reducaoOdontologico)
+              );
+
+              // Atualiza os sliders
+              document.getElementById("wellhub").value = novoValorWellhub;
+              const porcentagemWellhub = Math.round(
+                (novoValorWellhub / custoWellhub) * 100
+              );
+              document.getElementById("wellhubValue").textContent =
+                porcentagemWellhub + "%";
+
+              document.getElementById("odontologico").value =
+                novoValorOdontologico;
+              const porcentagemOdontologico = Math.round(
+                (novoValorOdontologico / custoOdontologico) * 100
+              );
+              document.getElementById("odontologicoValue").textContent =
+                porcentagemOdontologico + "%";
+
+              // Atualiza o valor do slider atual se necessário
+              if (sliderId === "wellhub") {
+                valorReal = novoValorWellhub;
+              } else if (sliderId === "odontologico") {
+                valorReal = novoValorOdontologico;
+              }
+            }
           }
-          // Clube de Vantagens não precisa definir max pois nunca é editável
+          // Exibe porcentagem aproximada baseada no custo
+          let porcentagem = 0;
+          if (sliderId === "wellhub" && custoWellhub > 0) {
+            porcentagem = Math.round((valorReal / custoWellhub) * 100);
+          } else if (sliderId === "odontologico" && custoOdontologico > 0) {
+            porcentagem = Math.round((valorReal / custoOdontologico) * 100);
+          }
+          // Exibe porcentagem ou "insento" se 100%
+          if (porcentagem === 100) {
+            valueElement.textContent = "100% insento";
+          } else {
+            valueElement.textContent = porcentagem + "%";
+          }
+        } else {
+          // Se não há funcionários ou valor médio, exibe 0%
+          valueElement.textContent = "0%";
         }
-
-        valueElement.textContent = formatarMoeda(valorReal);
 
         atualizarCalculos();
       }
 
       function desbloquearTodosSliders() {
-        const sliders = ["wellhub", "odontologico", "premiacao"];
+        const sliders = ["wellhub", "odontologico"];
 
         sliders.forEach((id) => {
           const slider = document.getElementById(id);
@@ -1165,12 +1253,18 @@
           slider.disabled = false;
         });
 
-        // Clube de Vantagens nunca é desbloqueado, sempre fica desabilitado
         const clubeVantagensSlider = document.getElementById("clubeVantagens");
         if (clubeVantagensSlider) {
           clubeVantagensSlider.classList.remove("blocked");
           clubeVantagensSlider.disabled = true;
           clubeVantagensSlider.classList.add("disabled");
+        }
+
+        // O slider de premiação sempre fica desabilitado (apenas visual)
+        const premiacaoSlider = document.getElementById("premiacao");
+        if (premiacaoSlider) {
+          premiacaoSlider.disabled = true;
+          premiacaoSlider.classList.add("disabled");
         }
       }
 
@@ -1186,11 +1280,7 @@
         const valorOdontologico = parseInt(
           document.getElementById("odontologico").value
         );
-        const valorPremiacao = parseInt(
-          document.getElementById("premiacao").value
-        );
 
-        // Clube de Vantagens não conta nos cálculos, apenas visual
         const clubeVantagensAtivado = document.getElementById(
           "clubeVantagensCheckbox"
         ).checked;
@@ -1200,18 +1290,101 @@
 
         atualizarCustosInline(funcionarios);
 
+        // Calcula o valor restante para premiação
+        let totalOutros =
+          valorWellhub + valorOdontologico + valorClubeVantagens;
+        let valorPremiacao = Math.max(0, beneficio - totalOutros);
+
+        // Se a premiação zerou, redistribui o excesso entre os outros sliders
+        if (valorPremiacao === 0 && totalOutros > beneficio) {
+          const excesso = totalOutros - beneficio;
+
+          // Redistribui o excesso proporcionalmente entre Wellhub e Odontológico
+          const totalWellhubOdonto = valorWellhub + valorOdontologico;
+
+          if (totalWellhubOdonto > 0) {
+            // Calcula a proporção de cada um
+            const proporcaoWellhub = valorWellhub / totalWellhubOdonto;
+            const proporcaoOdontologico =
+              valorOdontologico / totalWellhubOdonto;
+
+            // Reduz proporcionalmente
+            const reducaoWellhub = excesso * proporcaoWellhub;
+            const reducaoOdontologico = excesso * proporcaoOdontologico;
+
+            // Atualiza os valores
+            valorWellhub = Math.max(0, valorWellhub - reducaoWellhub);
+            valorOdontologico = Math.max(
+              0,
+              valorOdontologico - reducaoOdontologico
+            );
+
+            // Atualiza os sliders com as novas porcentagens
+            const wellhubSlider = document.getElementById("wellhub");
+            const odontologicoSlider = document.getElementById("odontologico");
+
+            if (wellhubSlider && custoWellhub > 0) {
+              const novaPorcentagemWellhub = Math.round(
+                (valorWellhub / custoWellhub) * 100
+              );
+              wellhubSlider.value = novaPorcentagemWellhub;
+              document.getElementById("wellhubValue").textContent =
+                novaPorcentagemWellhub + "%";
+            }
+
+            if (odontologicoSlider && custoOdontologico > 0) {
+              const novaPorcentagemOdontologico = Math.round(
+                (valorOdontologico / custoOdontologico) * 100
+              );
+              odontologicoSlider.value = novaPorcentagemOdontologico;
+              document.getElementById("odontologicoValue").textContent =
+                novaPorcentagemOdontologico + "%";
+            }
+
+            // Recalcula o total
+            totalOutros =
+              valorWellhub + valorOdontologico + valorClubeVantagens;
+            valorPremiacao = Math.max(0, beneficio - totalOutros);
+          }
+        }
+
+        // Atualiza o slider de premiação com o valor restante
+        const premiacaoSlider = document.getElementById("premiacao");
+        const premiacaoValue = document.getElementById("premiacaoValue");
+
+        premiacaoSlider.value = valorPremiacao;
+        premiacaoValue.textContent = formatarMoeda(valorPremiacao);
+
+        // Calcula o total realmente distribuído (incluindo premiação)
         const totalRealmenteDistribuido =
           valorWellhub +
           valorOdontologico +
           valorClubeVantagens +
           valorPremiacao;
-        const beneficioDisponivel = beneficio - totalRealmenteDistribuido;
-        document.getElementById("beneficioDisponivel").textContent =
-          formatarMoeda(beneficioDisponivel);
+
+        // Atualiza os custos inline com base na porcentagem
+        const wellhubCustoInline =
+          document.getElementById("wellhubCustoInline");
+        const odontologicoCustoInline = document.getElementById(
+          "odontologicoCustoInline"
+        );
+
+        if (wellhubCustoInline) {
+          wellhubCustoInline.textContent = `Custo: ${formatarMoeda(
+            custoWellhub
+          )}`;
+        }
+
+        if (odontologicoCustoInline) {
+          odontologicoCustoInline.textContent = `Custo: ${formatarMoeda(
+            custoOdontologico
+          )}`;
+        }
       }
 
       document.addEventListener("DOMContentLoaded", function () {
         validarCamposObrigatorios();
+
         atualizarCalculos();
       });
     </script>
