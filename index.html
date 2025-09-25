@@ -981,7 +981,7 @@
             </div>
           </div>
 
-          <div class="slider-item">
+          <div class="slider-item" style="padding-top: 70px">
             <div class="slider-header">
               <span class="slider-label">Caixinha de Premiações</span>
               <span class="slider-value" id="premiacaoValue">R$ 0,00</span>
@@ -1351,7 +1351,7 @@
                 (novoValorWellhub / custoWellhub) * 100
               );
               document.getElementById("wellhubValue").textContent =
-                porcentagemWellhub + "%";
+                porcentagemWellhub + "% disponível";
 
               document.getElementById("odontologico").value =
                 novoValorOdontologico;
@@ -1359,7 +1359,7 @@
                 (novoValorOdontologico / custoOdontologico) * 100
               );
               document.getElementById("odontologicoValue").textContent =
-                porcentagemOdontologico + "%";
+                porcentagemOdontologico + "% disponível";
 
               // Atualiza o valor do slider atual se necessário
               if (sliderId === "wellhub") {
@@ -1475,7 +1475,7 @@
               );
               wellhubSlider.value = novaPorcentagemWellhub;
               document.getElementById("wellhubValue").textContent =
-                novaPorcentagemWellhub + "% desconto";
+                novaPorcentagemWellhub + "% disponível";
             }
 
             if (odontologicoSlider && custoOdontologico > 0) {
@@ -1484,7 +1484,7 @@
               );
               odontologicoSlider.value = novaPorcentagemOdontologico;
               document.getElementById("odontologicoValue").textContent =
-                novaPorcentagemOdontologico + "% desconto";
+                novaPorcentagemOdontologico + "% disponível";
             }
 
             // Recalcula o total
