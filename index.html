@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.co om/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -362,6 +362,23 @@
         display: block;
       }
 
+      .slider-section {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        padding: 40px;
+        border-radius: 20px;
+        margin: 10px 0;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      }
+
+      .slider-section h3 {
+        color: #1e293b;
+        margin-bottom: 32px;
+        font-size: 24px;
+        text-align: center;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
 
       .slider-item {
         margin-bottom: 28px;
@@ -450,11 +467,6 @@
         border: 1px solid #e5e7eb;
       }
 
-      .slider-container {
-        position: relative;
-        margin-bottom: 10px;
-      }
-
       .slider {
         -webkit-appearance: none;
         appearance: none;
@@ -516,6 +528,131 @@
       .alert.show {
         display: block;
         animation: shake 0.6s ease;
+      }
+
+      .report-section {
+        margin-top: 40px;
+        text-align: center;
+      }
+
+      .report-button {
+        background: linear-gradient(135deg, #c53030 0%, #9b2c2c 100%);
+        color: white;
+        border: none;
+        padding: 16px 32px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 12px rgba(197, 48, 48, 0.3);
+      }
+
+      .report-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(197, 48, 48, 0.4);
+      }
+
+      .report-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        padding: 20px;
+      }
+
+      .report-modal {
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        max-width: 500px;
+        width: 100%;
+        max-height: 70vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        text-align: left;
+        position: relative;
+        animation: modalSlideIn 0.2s ease-out;
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: none;
+        border: none;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: #9ca3af;
+        transition: color 0.2s ease;
+      }
+
+      .modal-close:hover {
+        color: #374151;
+      }
+
+      .report-container h3 {
+        color: #1f2937;
+        margin-bottom: 24px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .report-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 0;
+        border-bottom: 1px solid #f1f5f9;
+      }
+
+      .report-item:last-child {
+        border-bottom: none;
+      }
+
+      .report-item.insento {
+        color: #374151;
+      }
+
+      .report-item.pendente {
+        color: #374151;
+      }
+
+      .report-item.premiacao {
+        color: #374151;
+      }
+
+      .report-label {
+        font-weight: 500;
+        font-size: 15px;
+      }
+
+      .report-value {
+        font-weight: 600;
+        font-size: 15px;
       }
 
       @keyframes shake {
@@ -613,6 +750,15 @@
           flex: none;
         }
 
+        .slider-section {
+          padding: 20px 15px;
+        }
+
+        .slider-section > div:first-child {
+          flex-direction: column;
+          align-items: center !important;
+          gap: 15px;
+        }
 
         .input-group {
           margin-bottom: 20px;
@@ -657,6 +803,26 @@
         .alert {
           padding: 15px 18px;
           font-size: 14px;
+        }
+
+        .report-container {
+          padding: 10px;
+        }
+
+        .report-modal {
+          padding: 20px;
+          max-height: 90vh;
+        }
+
+        .report-modal h3 {
+          font-size: 18px;
+          margin-bottom: 16px;
+        }
+
+        .modal-close {
+          width: 36px;
+          height: 36px;
+          font-size: 18px;
         }
       }
     </style>
@@ -709,7 +875,12 @@
           Preencha os campos acima para começar a distribuir o benefício
         </div>
 
-        <div class="slider-item">
+        <div class="slider-section">
+          <h3 style="margin-bottom: 32px; text-align: center">
+            Distribua seu benefício
+          </h3>
+
+          <div class="slider-item">
             <div class="checkbox-container">
               <input
                 type="checkbox"
@@ -724,7 +895,7 @@
               <div class="slider-title">
                 <span class="slider-label">Wellhub</span>
               </div>
-              <span class="slider-value" id="wellhubValue">0%</span>
+              <span class="slider-value" id="wellhubValue">0% desconto</span>
             </div>
             <div class="slider-container">
               <input
@@ -756,7 +927,9 @@
               <div class="slider-title">
                 <span class="slider-label">Plano Odontológico</span>
               </div>
-              <span class="slider-value" id="odontologicoValue">0%</span>
+              <span class="slider-value" id="odontologicoValue"
+                >0% desconto</span
+              >
             </div>
             <div class="slider-container">
               <input
@@ -789,7 +962,9 @@
               <div class="slider-title">
                 <span class="slider-label">Clube de Vantagens</span>
               </div>
-              <span class="slider-value" id="clubeVantagensValue">0%</span>
+              <span class="slider-value" id="clubeVantagensValue"
+                >0% desconto</span
+              >
             </div>
             <div class="slider-container">
               <input
@@ -825,6 +1000,28 @@
               />
             </div>
           </div>
+
+          <div class="report-section">
+            <button
+              id="gerarRelatorioBtn"
+              class="report-button"
+              onclick="gerarRelatorio()"
+            >
+              Gerar Relatório
+            </button>
+            <div
+              id="relatorioContainer"
+              class="report-container"
+              style="display: none"
+            >
+              <div class="report-modal">
+                <button class="modal-close" onclick="fecharModal()">×</button>
+                <h3>Relatório de Benefícios</h3>
+                <div id="relatorioContent"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -889,26 +1086,11 @@
         return 7.0;
       }
 
-      function atualizarCustosInline(funcionarios) {
+      function calcularCustos(funcionarios) {
         const valorPorVidaWellhub = calcularValorPorVidaWellhub(funcionarios);
         const custoWellhub = funcionarios * valorPorVidaWellhub;
         const custoOdontologico =
           funcionarios * calcularValorPorVidaOdontologico();
-
-        const custoInlineEl = document.getElementById("wellhubCustoInline");
-        if (custoInlineEl) {
-          custoInlineEl.textContent = `Custo: ${formatarMoeda(custoWellhub)}`;
-        }
-
-        const odontoInlineEl = document.getElementById(
-          "odontologicoCustoInline"
-        );
-        if (odontoInlineEl) {
-          odontoInlineEl.textContent = `Custo: ${formatarMoeda(
-            custoOdontologico
-          )}`;
-        }
-
         return { custoWellhub, custoOdontologico };
       }
 
@@ -982,7 +1164,7 @@
           slider.value = 0;
           slider.disabled = true;
           slider.classList.add("disabled");
-          document.getElementById("wellhubValue").textContent = "0%";
+          document.getElementById("wellhubValue").textContent = "0% desconto";
           atualizarCalculos();
         }
       }
@@ -997,7 +1179,8 @@
           slider.value = 0;
           slider.disabled = true;
           slider.classList.add("disabled");
-          document.getElementById("odontologicoValue").textContent = "0%";
+          document.getElementById("odontologicoValue").textContent =
+            "0% disponível";
           atualizarCalculos();
         }
       }
@@ -1019,7 +1202,7 @@
           slider.value = 0;
           slider.disabled = true;
           slider.classList.add("disabled");
-          valueElement.textContent = "0%";
+          valueElement.textContent = "0% desconto";
 
           atualizarCalculos();
         }
@@ -1031,9 +1214,11 @@
         document.getElementById("clubeVantagens").value = 0;
         document.getElementById("premiacao").value = 0;
 
-        document.getElementById("wellhubValue").textContent = "0%";
-        document.getElementById("odontologicoValue").textContent = "0%";
-        document.getElementById("clubeVantagensValue").textContent = "0%";
+        document.getElementById("wellhubValue").textContent = "0% desconto";
+        document.getElementById("odontologicoValue").textContent =
+          "0% desconto";
+        document.getElementById("clubeVantagensValue").textContent =
+          "0% desconto";
         document.getElementById("premiacaoValue").textContent = "R$ 0,00";
 
         document.getElementById("wellhubCheckbox").checked = false;
@@ -1064,7 +1249,7 @@
           const beneficio = totalCarregado * 0.03;
 
           const { custoWellhub, custoOdontologico } =
-            atualizarCustosInline(funcionarios);
+            calcularCustos(funcionarios);
 
           const wellhubSlider = document.getElementById("wellhub");
           if (wellhubSlider)
@@ -1082,14 +1267,6 @@
             premiacaoSlider.setAttribute("max", Math.floor(beneficio));
 
           atualizarCalculos();
-        } else {
-          const custoInlineEl = document.getElementById("wellhubCustoInline");
-          if (custoInlineEl) custoInlineEl.textContent = "Custo: R$ 0,00";
-
-          const odontoInlineEl = document.getElementById(
-            "odontologicoCustoInline"
-          );
-          if (odontoInlineEl) odontoInlineEl.textContent = "Custo: R$ 0,00";
         }
       }
 
@@ -1109,7 +1286,7 @@
 
         if (funcionarios && valorMedio) {
           const { custoWellhub, custoOdontologico } =
-            atualizarCustosInline(funcionarios);
+            calcularCustos(funcionarios);
           const totalCarregado = funcionarios * valorMedio;
           const beneficio = totalCarregado * 0.03;
 
@@ -1203,11 +1380,11 @@
           if (porcentagem === 100) {
             valueElement.textContent = "100% insento";
           } else {
-            valueElement.textContent = porcentagem + "%";
+            valueElement.textContent = porcentagem + "% desconto";
           }
         } else {
           // Se não há funcionários ou valor médio, exibe 0%
-          valueElement.textContent = "0%";
+          valueElement.textContent = "0% desconto";
         }
 
         atualizarCalculos();
@@ -1257,7 +1434,7 @@
           ? 0
           : parseInt(document.getElementById("clubeVantagens").value);
 
-        atualizarCustosInline(funcionarios);
+        calcularCustos(funcionarios);
 
         // Calcula o valor restante para premiação
         let totalOutros =
@@ -1298,7 +1475,7 @@
               );
               wellhubSlider.value = novaPorcentagemWellhub;
               document.getElementById("wellhubValue").textContent =
-                novaPorcentagemWellhub + "%";
+                novaPorcentagemWellhub + "% desconto";
             }
 
             if (odontologicoSlider && custoOdontologico > 0) {
@@ -1307,7 +1484,7 @@
               );
               odontologicoSlider.value = novaPorcentagemOdontologico;
               document.getElementById("odontologicoValue").textContent =
-                novaPorcentagemOdontologico + "%";
+                novaPorcentagemOdontologico + "% desconto";
             }
 
             // Recalcula o total
@@ -1330,26 +1507,139 @@
           valorOdontologico +
           valorClubeVantagens +
           valorPremiacao;
+      }
 
-        // Atualiza os custos inline com base na porcentagem
-        const wellhubCustoInline =
-          document.getElementById("wellhubCustoInline");
-        const odontologicoCustoInline = document.getElementById(
-          "odontologicoCustoInline"
+      function gerarRelatorio() {
+        const { funcionarios, valorMedio } = obterValoresCampos();
+
+        if (!funcionarios || !valorMedio) {
+          alert("Preencha os campos obrigatórios primeiro!");
+          return;
+        }
+
+        const totalCarregado = funcionarios * valorMedio;
+        const beneficio = totalCarregado * 0.03;
+
+        const { custoWellhub, custoOdontologico } =
+          calcularCustos(funcionarios);
+
+        const valorWellhub = parseInt(document.getElementById("wellhub").value);
+        const valorOdontologico = parseInt(
+          document.getElementById("odontologico").value
+        );
+        const valorClubeVantagens = parseInt(
+          document.getElementById("clubeVantagens").value
+        );
+        const valorPremiacao = parseInt(
+          document.getElementById("premiacao").value
         );
 
-        if (wellhubCustoInline) {
-          wellhubCustoInline.textContent = `Custo: ${formatarMoeda(
-            custoWellhub
-          )}`;
+        const clubeVantagensAtivado = document.getElementById(
+          "clubeVantagensCheckbox"
+        ).checked;
+
+        let relatorioHTML = "";
+
+        // Wellhub
+        if (document.getElementById("wellhubCheckbox").checked) {
+          const porcentagemWellhub = Math.round(
+            (valorWellhub / custoWellhub) * 100
+          );
+          if (porcentagemWellhub === 100) {
+            relatorioHTML += `
+               <div class="report-item insento">
+                 <span class="report-label">Wellhub</span>
+                 <span class="report-value">Isento</span>
+               </div>
+             `;
+          } else {
+            const valorFaltando = custoWellhub - valorWellhub;
+            relatorioHTML += `
+               <div class="report-item pendente">
+                 <span class="report-label">Wellhub</span>
+                 <span class="report-value">Valor a Pagar: ${formatarMoeda(
+                   valorFaltando
+                 )}</span>
+               </div>
+             `;
+          }
         }
 
-        if (odontologicoCustoInline) {
-          odontologicoCustoInline.textContent = `Custo: ${formatarMoeda(
-            custoOdontologico
-          )}`;
+        // Plano Odontológico
+        if (document.getElementById("odontologicoCheckbox").checked) {
+          const porcentagemOdontologico = Math.round(
+            (valorOdontologico / custoOdontologico) * 100
+          );
+          if (porcentagemOdontologico === 100) {
+            relatorioHTML += `
+               <div class="report-item insento">
+                 <span class="report-label">Plano Odontológico</span>
+                 <span class="report-value">Isento</span>
+               </div>
+             `;
+          } else {
+            const valorFaltando = custoOdontologico - valorOdontologico;
+            relatorioHTML += `
+               <div class="report-item pendente">
+                 <span class="report-label">Plano Odontológico</span>
+                 <span class="report-value">Valor a Pagar: ${formatarMoeda(
+                   valorFaltando
+                 )}</span>
+               </div>
+             `;
+          }
         }
+
+        // Clube de Vantagens
+        if (clubeVantagensAtivado) {
+          relatorioHTML += `
+             <div class="report-item insento">
+               <span class="report-label">Clube de Vantagens</span>
+               <span class="report-value">Isento</span>
+             </div>
+           `;
+        }
+
+        // Premiação - sempre exibe
+        relatorioHTML += `
+           <div class="report-item premiacao">
+             <span class="report-label">Caixinha de Premiações</span>
+             <span class="report-value">${formatarMoeda(valorPremiacao)}</span>
+           </div>
+         `;
+
+        // Resumo
+        relatorioHTML += `
+           <div class="report-item" style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e5e7eb;">
+             <span class="report-label" style="font-weight: 600;">Total do Benefício</span>
+             <span class="report-value" style="font-weight: 700;">${formatarMoeda(
+               beneficio
+             )}</span>
+           </div>
+         `;
+
+        document.getElementById("relatorioContent").innerHTML = relatorioHTML;
+        document.getElementById("relatorioContainer").style.display = "flex";
       }
+
+      function fecharModal() {
+        document.getElementById("relatorioContainer").style.display = "none";
+      }
+
+      // Fechar modal clicando fora dele
+      document.addEventListener("click", function (event) {
+        const modal = document.getElementById("relatorioContainer");
+        if (event.target === modal) {
+          fecharModal();
+        }
+      });
+
+      // Fechar modal com tecla ESC
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          fecharModal();
+        }
+      });
 
       document.addEventListener("DOMContentLoaded", function () {
         validarCamposObrigatorios();
